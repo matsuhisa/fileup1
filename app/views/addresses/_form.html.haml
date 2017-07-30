@@ -11,7 +11,7 @@
     = f.number_field :user_id
   .field
     = f.label :prefecture_id
-    = f.number_field :prefecture_id
+    = f.collection_select :prefecture_id, Prefecture.all, :id, :name
   .field
     = f.label :municipality
     = f.text_field :municipality
