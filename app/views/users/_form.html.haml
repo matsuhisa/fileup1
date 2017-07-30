@@ -14,13 +14,11 @@
     = f.number_field :age
 
   .field
-    = f.label :職場
-    = f.text_field :office_prefecture_id
-    = f.text_field :office_municipality
-
-    = f.label :自宅
-    = f.text_field :home_prefecture_id
-    = f.text_field :home_municipality
+    = f.label :addresses
+    = f.fields_for :addresses do |addresses_form|
+      = addresses_form.text_field :municipality
+      = addresses_form.collection_select :prefecture_id, Prefecture.all, :id, :name
+      = addresses_form.select :kind_id, Address.kind_ids.keys.to_a, {}
 
   .actions
     = f.submit 'Save'

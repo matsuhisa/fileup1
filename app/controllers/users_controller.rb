@@ -15,6 +15,10 @@ class UsersController < ApplicationController
   # GET /users/new
   def new
     @user = User.new
+    home_address = Address.new(kind_id: 'home')
+    office_address = Address.new(kind_id: 'office')
+    @user.addresses << home_address
+    @user.addresses << office_address
   end
 
   # GET /users/1/edit
@@ -69,6 +73,6 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:name, :age)
+      params.require(:user).permit(:name, :age, addresses_attributes: [:id, :municipality, :prefecture_id, :kind_id])
     end
 end
