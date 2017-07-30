@@ -1,3 +1,3 @@
 class Address < ApplicationRecord
-  has_one :prefcture
+  belongs_to :prefecture
 end

@@ -14,7 +14,7 @@
     - @addresses.each do |address|
       %tr
         %td= address.user_id
-        %td= address.prefecture_id
+        %td= address.prefecture.name
         %td= address.municipality
         %td= link_to 'Show', address
         %td= link_to 'Edit', edit_address_path(address)
