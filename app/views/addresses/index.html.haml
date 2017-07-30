@@ -6,6 +6,7 @@
       %th User
       %th Prefecture
       %th Municipality
+      %th Kind
       %th
       %th
       %th
@@ -16,6 +17,7 @@
         %td= address.user_id
         %td= address.prefecture.name
         %td= address.municipality
+        %td= address.kind_id
         %td= link_to 'Show', address
         %td= link_to 'Edit', edit_address_path(address)
         %td= link_to 'Destroy', address, method: :delete, data: { confirm: 'Are you sure?' }

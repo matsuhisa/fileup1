@@ -9,9 +9,10 @@
 
 %p
   %b Addresses:
-  - @user.addresses.each do |address|
-    #{address.prefecture.name} #{address.municipality}
-
+  %ul
+    - @user.addresses.each do |address|
+      %li
+        #{address.prefecture.name} #{address.municipality}（#{address.kind_id}）
 
 = link_to 'Edit', edit_user_path(@user)
 \|
