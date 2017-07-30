@@ -7,6 +7,12 @@
   %b Age:
   = @user.age
 
+%p
+  %b Addresses:
+  - @user.addresses.each do |address|
+    #{address.prefecture.name} #{address.municipality}
+
+
 = link_to 'Edit', edit_user_path(@user)
 \|
 = link_to 'Back', users_path

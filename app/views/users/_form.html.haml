@@ -12,5 +12,15 @@
   .field
     = f.label :age
     = f.number_field :age
+
+  .field
+    = f.label :職場
+    = f.text_field :office_prefecture_id
+    = f.text_field :office_municipality
+
+    = f.label :自宅
+    = f.text_field :home_prefecture_id
+    = f.text_field :home_municipality
+
   .actions
     = f.submit 'Save'
