@@ -10,6 +10,10 @@
   %b Municipality:
   = @address.municipality
 
+%p
+  %b Kind:
+  = @address.kind_id
+
 = link_to 'Edit', edit_address_path(@address)
 \|
 = link_to 'Back', addresses_path

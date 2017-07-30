@@ -15,5 +15,8 @@
   .field
     = f.label :municipality
     = f.text_field :municipality
+  .field
+    = f.label :kind_id
+    = f.select :kind_id, Address.kind_ids.keys.to_a, {}
   .actions
     = f.submit 'Save'
