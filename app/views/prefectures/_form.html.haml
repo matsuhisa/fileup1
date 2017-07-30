@@ -1,0 +1,13 @@
+= form_for @prefecture do |f|
+  - if @prefecture.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@prefecture.errors.count, "error")} prohibited this prefecture from being saved:"
+      %ul
+        - @prefecture.errors.full_messages.each do |message|
+          %li= message
+
+  .field
+    = f.label :name
+    = f.text_field :name
+  .actions
+    = f.submit 'Save'

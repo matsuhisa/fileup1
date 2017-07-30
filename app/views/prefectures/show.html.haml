@@ -1,0 +1,9 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @prefecture.name
+
+= link_to 'Edit', edit_prefecture_path(@prefecture)
+\|
+= link_to 'Back', prefectures_path
