@@ -4,7 +4,7 @@ class PrefecturesController < ApplicationController
   # GET /prefectures
   # GET /prefectures.json
   def index
-    @prefectures = Prefecture.all
+    @prefectures = Prefecture.page(params[:page]).per(5)
   end
 
   # GET /prefectures/1
