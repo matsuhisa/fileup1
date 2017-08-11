@@ -17,6 +17,10 @@ class UsersController < ApplicationController
     @user = User.new
     home_address = Address.new(kind_id: 'home')
     office_address = Address.new(kind_id: 'office')
+    3.times do ||
+      @user.post_images << PostImage.new()
+    end
+
     @user.addresses << home_address
     @user.addresses << office_address
   end
@@ -30,6 +34,16 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     @user.addresses = @user.addresses.reject { |item| item.municipality.blank? }
+
+    user_params[:post_images_attributes].to_h.keys.each.with_index do |key, index|
+      upload_image = user_params[:post_images_attributes].to_h[key]['file_name']
+      output_path = Rails.root.join('public', upload_image.original_filename)
+      File.open(output_path, 'w+b') do |fp|
+        fp.write  upload_image.read
+      end
+      @user.post_images[index].file_name = upload_image.original_filename
+    end
+
     respond_to do |format|
       if @user.save
         format.html { redirect_to @user, notice: 'User was successfully created.' }
@@ -74,6 +88,10 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:name, :age, addresses_attributes: [:id, :municipality, :prefecture_id, :kind_id])
+      params.require(:user).permit(
+        :name, :age, 
+        addresses_attributes: [:id, :municipality, :prefecture_id, :kind_id],
+        post_images_attributes: [:id, :file_name]
+      )
     end
 end
