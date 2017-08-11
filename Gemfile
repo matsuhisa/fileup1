@@ -18,6 +18,8 @@ gem 'jbuilder'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
+gem 'aws-sdk'
+
 gem 'haml'
 gem 'haml-rails'
 gem 'erb2haml'
