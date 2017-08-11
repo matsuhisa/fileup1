@@ -1,0 +1,17 @@
+default: &default
+  adapter: mysql2
+  pool: 5
+
+development:
+  <<: *default
+  username: root
+  host: localhost
+  password: 
+  database: file_up
+
+test:
+  <<: *default
+  username: root
+  host: localhost
+  password: 
+  database: file_up_test

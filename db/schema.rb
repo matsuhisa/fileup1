@@ -12,7 +12,7 @@
 
 ActiveRecord::Schema.define(version: 20170730062728) do
 
-  create_table "addresses", force: :cascade do |t|
+  create_table "addresses", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "user_id"
     t.integer "prefecture_id"
     t.string "municipality"
@@ -21,13 +21,13 @@ ActiveRecord::Schema.define(version: 20170730062728) do
     t.integer "kind_id", default: 1, null: false
   end
 
-  create_table "prefectures", force: :cascade do |t|
+  create_table "prefectures", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "users", force: :cascade do |t|
+  create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
     t.integer "age"
     t.datetime "created_at", null: false
