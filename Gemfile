@@ -32,6 +32,10 @@ group :development, :test do
   # gem 'selenium-webdriver'
   gem 'rspec-rails'
   gem 'factory_girl_rails'
+  gem 'pry-byebug'
+  gem 'pry-doc'
+  gem 'pry-rails'
+  gem 'pry-stack_explorer'
 end
 
 group :development do
