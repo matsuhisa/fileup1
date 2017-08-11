@@ -6,7 +6,7 @@ git_source(:github) do |repo_name|
 end
 
 gem 'rails'
-gem 'sqlite3'
+gem 'mysql2'
 gem 'puma'
 gem 'sass-rails'
 gem 'uglifier'
