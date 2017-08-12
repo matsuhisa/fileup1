@@ -6,10 +6,10 @@ RSpec.feature 'ユーザページ', type: :feature do
     expect(page).to have_title 'Fileup1'
   end
 
-  scenario 'ファイルアップロードをする' do
+  scenario 'ファイルアップロードをする', js: true do
     visit users_path
     expect(page).to have_title 'Fileup1'
-
+    
     click_on 'New User'
     expect(page).to have_content '新規ユーザー登録'
 
