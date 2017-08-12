@@ -14,14 +14,7 @@ class UsersController < ApplicationController
 
   # GET /users/new
   def new
-    @user = User.new
-
-    3.times do ||
-      @user.post_images << PostImage.new()
-    end
-
-    @user.addresses << home_address = Address.new(kind_id: 'home')
-    @user.addresses << office_address = Address.new(kind_id: 'office')
+    @user_register_form = User::RegistrationForm.new
   end
 
   # GET /users/1/edit
@@ -31,25 +24,13 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
-    @user = User.new(user_params)
-    @user.addresses = @user.addresses.reject { |item| item.municipality.blank? }
-
-    user_params[:post_images_attributes].to_h.keys.each.with_index do |key, index|
-      upload_image = user_params[:post_images_attributes].to_h[key]['file_name']
-      output_path = Rails.root.join('public', upload_image.original_filename)
-      File.open(output_path, 'w+b') do |fp|
-        fp.write  upload_image.read
-      end
-      @user.post_images[index].file_name = upload_image.original_filename
-    end
+    @user_register_form = User::RegistrationForm.new(user_params)
 
     respond_to do |format|
-      if @user.save
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
-        format.json { render :show, status: :created, location: @user }
+      if @user_register_form.save
+        format.html { redirect_to @user_register_form.user, notice: 'User was successfully created.' }
       else
         format.html { render :new }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -87,7 +68,7 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(
+      params.require(:user_registration_form).permit(
         :name, :age, 
         addresses_attributes: [:id, :municipality, :prefecture_id, :kind_id],
         post_images_attributes: [:id, :file_name]

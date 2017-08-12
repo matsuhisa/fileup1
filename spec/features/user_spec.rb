@@ -13,9 +13,10 @@ RSpec.feature 'ユーザページ', type: :feature do
     click_on 'New User'
     expect(page).to have_content '新規ユーザー登録'
 
-    fill_in 'user[name]', with: 'かもねぎ'
-    attach_file 'user[post_images_attributes][0][file_name]', "#{Rails.root}/spec/images/octocat.png"
-    attach_file 'user[post_images_attributes][1][file_name]', "#{Rails.root}/spec/images/octocat.png"
+    fill_in 'user_registration_form[name]', with: 'かもねぎ'
+    fill_in 'user_registration_form[addresses_attributes][0][municipality]', with: '帯広市'
+    attach_file 'user_registration_form[post_images_attributes][0][file_name]', "#{Rails.root}/spec/images/octocat.png"
+    attach_file 'user_registration_form[post_images_attributes][1][file_name]', "#{Rails.root}/spec/images/octocat.png"
     click_button 'Save'
 
     expect(page).to have_content 'User was successfully'
