@@ -15,14 +15,13 @@ class UsersController < ApplicationController
   # GET /users/new
   def new
     @user = User.new
-    home_address = Address.new(kind_id: 'home')
-    office_address = Address.new(kind_id: 'office')
+
     3.times do ||
       @user.post_images << PostImage.new()
     end
 
-    @user.addresses << home_address
-    @user.addresses << office_address
+    @user.addresses << home_address = Address.new(kind_id: 'home')
+    @user.addresses << office_address = Address.new(kind_id: 'office')
   end
 
   # GET /users/1/edit
