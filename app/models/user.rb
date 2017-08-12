@@ -5,4 +5,8 @@ class User < ApplicationRecord
   accepts_nested_attributes_for :post_images
 
   validates :name, presence: true
+
+  def foo
+    'foo'
+  end
 end
