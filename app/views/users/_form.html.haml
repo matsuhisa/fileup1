@@ -21,9 +21,11 @@
       = addresses_form.select :kind_id, Address.kind_ids.keys.to_a, {}
 
   .field
-    = f.label :post_images
-    = f.fields_for :post_images do |image_form|
-      = image_form.file_field :file_name, accept: 'image/jpg,image/jpeg,image/png,image/gif'
+    %ul
+      %li
+        = f.fields_for :post_images do |image_form|
+          = f.label :post_images
+          = image_form.file_field :file_name, accept: 'image/jpg,image/jpeg,image/png,image/gif'
 
   .actions
     = f.submit 'Save'
