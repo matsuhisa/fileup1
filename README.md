@@ -22,6 +22,20 @@
 - [ ] 確認画面を用意する
 - [ ] 「同意する」check button を用意する
 - [ ] form_object を使う
+  - テストの追加をする
+  - [ ] userだけの時のテスト
+  - [ ] 画像も一緒の時のテスト
+  - [ ] 入力でエラーがあった時のテスト
 - [x] form_with を使う
 - [x] テストを書く
 - [x] Public にアップロードしてみる
+
+## 気づきメモ
+
+### form_object の時
+
+- PostImage クラスと ActionDispatch::Http::UploadedFile をどう扱うか？
+  - params では、ActionDispatch::Http::UploadedFile を扱える
+  - form_object ではどのように扱うのかがいいのか？
+  - uploaded_files というのがある想定でやってみた
+
