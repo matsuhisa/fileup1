@@ -41,7 +41,7 @@ RSpec.feature 'ユーザページ', type: :feature do
     expect(user.post_images.size).to eq 2
   end
 
-  xscenario 'ファイルアップロードと再入力がある場合', js: true do
+  scenario 'ファイルアップロードと再入力がある場合', js: true do
     visit users_path
     expect(page).to have_title 'Fileup1'
 
