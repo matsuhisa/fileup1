@@ -42,7 +42,7 @@ Capybara.javascript_driver = :selenium
 # If you are not using ActiveRecord, you can remove this line.
 ActiveRecord::Migration.maintain_test_schema!
 
-Rails.logger = Logger.new(STDOUT)
+#Rails.logger = Logger.new(STDOUT)
 
 RSpec.configure do |config|
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
