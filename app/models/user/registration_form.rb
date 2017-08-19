@@ -40,7 +40,14 @@ class User::RegistrationForm
           file_path = PostImage::PUBLIC_IMAGE_PATH + file_name
           images << PostImage.new( file_name: file_name, file_path: file_path )
         end
+
+        if user_params[:post_images_attributes].to_h[key]['file_path'].present?
+          file_path = user_params[:post_images_attributes].to_h[key]['file_path']
+          file_name = file_path.gsub(PostImage::PUBLIC_IMAGE_PATH, '')
+          images << PostImage.new( file_name: file_name, file_path: file_path )
+        end
       end
+
       if default_post_image_count > images.size
         (default_post_image_count - images.size).times do
           images << PostImage.new()
@@ -77,7 +84,7 @@ class User::RegistrationForm
     return false if invalid?
     @user = User.new(name: name, age: age)
     @user.addresses = @addresses
-    @user.post_images = @post_images
+    @user.post_images = @post_images.reject{ |image| image.invalid? }
     @user.save!
     true
   end

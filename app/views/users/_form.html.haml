@@ -27,9 +27,11 @@
       = f.fields_for :post_images do |image_form|
         %li
           = f.label :post_images
-          = image_form.file_field :file_name, accept: 'image/jpg,image/jpeg,image/png,image/gif'
-          = image_form.text_field :file_path
-          - unless @user_register_form.post_images[image_form.index].file_path.nil?
+          - if @user_register_form.post_images[image_form.index].file_path.nil?
+            = image_form.file_field :file_name, accept: 'image/jpg,image/jpeg,image/png,image/gif'
+          - else
             = image_tag @user_register_form.post_images[image_form.index].file_path, width: '100'
+          = image_form.text_field :file_path
+
   .actions
     = f.submit 'Save'
