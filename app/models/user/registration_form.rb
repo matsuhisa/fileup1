@@ -30,18 +30,25 @@ class User::RegistrationForm
       default_addresses
     end
 
+    default_post_image_count = 3
+    default_post_images = default_post_image_count.times.map{ PostImage.new() }
     @post_images = if user_params.has_key?(:post_images_attributes)
       images = []
       user_params[:post_images_attributes].to_h.keys.each.with_index do |key, index|
         if user_params[:post_images_attributes].to_h[key]['file_name'].present?
           file_name = user_params[:post_images_attributes].to_h[key]['file_name'].original_filename
-          file_path = '/images/' + file_name
+          file_path = PostImage::PUBLIC_IMAGE_PATH + file_name
           images << PostImage.new( file_name: file_name, file_path: file_path )
+        end
+      end
+      if default_post_image_count > images.size
+        (default_post_image_count - images.size).times do
+          images << PostImage.new()
         end
       end
       images
     else
-      3.times.map{ PostImage.new() }
+      default_post_images
     end
 
     @uploaded_files = if user_params.has_key?(:post_images_attributes)
@@ -58,7 +65,7 @@ class User::RegistrationForm
   def save_image
     if @uploaded_files.present?
       @uploaded_files.each.with_index do |upload_image, index|
-        output_path = Rails.root.join('public/images', upload_image.original_filename)
+        output_path = Rails.root.join('public' + PostImage::PUBLIC_IMAGE_PATH, upload_image.original_filename)
         File.open(output_path, 'w+b') do |fp|
           fp.write  upload_image.read
         end
