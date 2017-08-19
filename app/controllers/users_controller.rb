@@ -59,7 +59,7 @@ class UsersController < ApplicationController
       params.require(:user_registration_form).permit(
         :name, :age, 
         addresses_attributes: [:id, :municipality, :prefecture_id, :kind_id],
-        post_images_attributes: [:id, :file_name]
+        post_images_attributes: [:id, :file_name, :image_path]
       )
     end
 end
