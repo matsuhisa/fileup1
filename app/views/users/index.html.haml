@@ -1,12 +1,12 @@
 %h1 Listing users
 
+%p= link_to 'New User', new_user_path
+
 %table
   %thead
     %tr
       %th Name
       %th Age
-      %th
-      %th
       %th
 
   %tbody
@@ -15,9 +15,5 @@
         %td= user.name
         %td= user.age
         %td= link_to 'Show', user
-        %td= link_to 'Edit', edit_user_path(user)
-        %td= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' }
 
-%br
-
-= link_to 'New User', new_user_path
+%p= link_to 'New User', new_user_path
