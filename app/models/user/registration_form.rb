@@ -1,13 +1,10 @@
 class User::RegistrationForm
   include ActiveModel::Model
-  # include ActiveModel::Validations
   include ActiveModel::Validations::Callbacks
 
   attr_accessor :user, :name, :age, :addresses, :addresses_attributes, :post_images, :post_images_attributes, :uploaded_files
 
   validates :name, presence: true
-
-  before_validation :save_image
 
   def initialize(user_params = {})
     @name ||= user_params['name']
@@ -35,15 +32,14 @@ class User::RegistrationForm
     @post_images = if user_params.has_key?(:post_images_attributes)
       images = []
       user_params[:post_images_attributes].to_h.keys.each.with_index do |key, index|
-        if user_params[:post_images_attributes].to_h[key]['file_name'].present?
+        if user_params[:post_images_attributes].to_h[key]['file_name'].kind_of?(ActionDispatch::Http::UploadedFile)
           file_name = user_params[:post_images_attributes].to_h[key]['file_name'].original_filename
           file_path = PostImage::PUBLIC_IMAGE_PATH + file_name
-          images << PostImage.new( file_name: file_name, file_path: file_path )
-        end
-
-        if user_params[:post_images_attributes].to_h[key]['file_path'].present?
+        else user_params[:post_images_attributes].to_h[key]['file_path'].present?
           file_path = user_params[:post_images_attributes].to_h[key]['file_path']
           file_name = file_path.gsub(PostImage::PUBLIC_IMAGE_PATH, '')
+        end
+        if file_path.present? && file_name.present?
           images << PostImage.new( file_name: file_name, file_path: file_path )
         end
       end
@@ -88,5 +84,4 @@ class User::RegistrationForm
     @user.save!
     true
   end
-
 end

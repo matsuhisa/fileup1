@@ -19,7 +19,10 @@ RSpec.feature 'ユーザページ', type: :feature do
     fill_in 'user_registration_form[name]', with: '山田'
     click_button 'Save'
 
-    expect(page).to have_content 'User was successfully'
+    expect(page).to have_content 'confirm'
+    click_button 'Save'
+
+    expect(page).to have_content 'complete'
   end
 
   scenario 'ファイルアップロードをする', js: true do
@@ -36,7 +39,10 @@ RSpec.feature 'ユーザページ', type: :feature do
     attach_file 'user_registration_form[post_images_attributes][1][file_name]', "#{Rails.root}/spec/images/octocat.png"
     click_button 'Save'
 
-    expect(page).to have_content 'User was successfully'
+    expect(page).to have_content 'confirm'
+    click_button 'Save'
+
+    expect(page).to have_content 'complete'
     user = User.find_by(name: '佐藤')
     expect(user.post_images.size).to eq 2
   end
@@ -60,7 +66,10 @@ RSpec.feature 'ユーザページ', type: :feature do
     fill_in 'user_registration_form[name]', with: '田中'
     click_button 'Save'
 
-    expect(page).to have_content 'User was successfully'
+    expect(page).to have_content 'confirm'
+    click_button 'Save'
+
+    expect(page).to have_content 'complete'
     user = User.find_by(name: '田中')
     expect(user.post_images.size).to eq 2
   end

@@ -13,17 +13,19 @@ class UsersController < ApplicationController
   end
 
   def confirm
+    @user_register_form = User::RegistrationForm.new(user_params)
+    @user_register_form.save_image
+    if @user_register_form.invalid?
+      render :new
+    end
   end
 
   def create
     @user_register_form = User::RegistrationForm.new(user_params)
-
-    respond_to do |format|
-      if @user_register_form.save
-        format.html { redirect_to @user_register_form.user, notice: 'User was successfully created.' }
-      else
-        format.html { render :new }
-      end
+    if @user_register_form.save
+      redirect_to complete_users_path
+    else
+      format.html { render :new }
     end
   end
 
@@ -40,7 +42,7 @@ class UsersController < ApplicationController
 
     def user_params
       params.require(:user_registration_form).permit(
-        :name, :age, 
+        :name, :age,
         addresses_attributes: [:id, :municipality, :prefecture_id, :kind_id],
         post_images_attributes: [:id, :file_name, :file_path]
       )

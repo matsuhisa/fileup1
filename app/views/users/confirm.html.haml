@@ -1,1 +1,35 @@
 %h1 confirm
+
+%h2
+  名前
+  = @user_register_form.name
+
+%h2
+  年齢
+  = @user_register_form.age
+
+%h2
+  住所
+  %ul
+    - @user_register_form.addresses.each do |address|
+      %li= address.municipality
+      %li= address.prefecture.name
+      %li= address.kind_id
+%h2
+  画像
+  %ul
+    - @user_register_form.post_images.each do |post_image|
+      - if post_image.file_path.present?
+        %li= image_tag post_image.file_path, width: '100'
+
+= form_with model: @user_register_form, url: users_path, local: true do |f|
+  = f.hidden_field :name
+  = f.hidden_field :age
+  = f.fields_for :addresses do |addresses_form|
+    = addresses_form.hidden_field :municipality
+    = addresses_form.hidden_field :prefecture_id
+    = addresses_form.hidden_field :kind_id
+  = f.fields_for :post_images do |image_form|
+    = image_form.hidden_field :file_name
+    = image_form.hidden_field :file_path
+  = f.submit 'Save'
