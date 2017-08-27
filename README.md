@@ -1,4 +1,4 @@
-# Rails でファイルアップロード：2017
+# Rails で~~ファイル~~画像ファイルアップロード：2017
 
 ## 環境
 
@@ -10,6 +10,15 @@
 - 2017年、Rails でファイルアップロードを作るとしたらどうするんだろう？と考えるための試作品
 - Rails に限定してみた（他のフレームワークなら...というのはあるかもしれない）
 
+## gem でやる前に
+
+
+## UI/UX
+
+## 先？
+
+- S3 にファイルをアップロードしたら Lamda で処理
+
 ## TODO
 
 - [ ] show で画像を表示する
@@ -18,14 +27,20 @@
 
 - [ ] ダイレクトアップロード
   - es6で行うのでbabelの用意
+  - Capybara でドラッグ&ドロップのテスト
+      - http://qiita.com/gymnstcs/items/0852a06d735dac748296
+      - http://ria10.hatenablog.com/entry/20131230/1388372110
 - [ ] S3にファイルを置く
   - [ ] S3へのアップロード設定
   - [ ] S3のアップロードのテスト
-- [ ] フォーム内で画像のプレビューをする
-  - 入力画面
-  - 確認画面
 - [ ] 「同意する」check button を用意する
+- [x] フォーム内で画像のプレビューをする
+  - [x] 入力画面
+  - [x] 確認画面
+  - [ ]テスト
 - [ ] 確認画面を用意する
+   - [x] 画像の保存
+   - [ ] テスト
 - [x] 入力エラーの対応
   - [x] 入力エラー画面でも画像は保持する
   - [x] 入力でエラーがあった時のテスト
@@ -65,11 +80,25 @@ class PostImage < ApplicationRecord
 end
 ```
 
+### どのタイミングでファイルを保存するか？
+
+- 確認画面にいく時点で保存してしまう。問題なければそのまま
+- S3であればディスク容量をあまり考えない
+  - 最初はtmpというディレクトリに保存するけれど、完了画面時にディレクトリ移動するとか
+  - /tmp というディレクトリは30日後に削除する、という設定が S3 では可能
+
 ## 参考URL
+
+### willnet
+
+- http://blog.willnet.in/entry/2017/08/21/093000
 
 ### ダイレクトアップロード？
 
 - http://qiita.com/yuku_t/items/40b7daf018d3dab48974
+- http://qiita.com/usutani/items/37988abd0873fd491625
+- https://www.designedbyaturtle.co.uk/2015/direct-upload-to-s3-using-aws-signature-v4-php/
+- http://docs.aws.amazon.com/ja_jp/AmazonS3/latest/dev/HLTrackProgressMPUJava.html
 
 ### Refile
 
