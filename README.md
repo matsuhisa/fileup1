@@ -24,7 +24,6 @@
 - [ ] show で画像を表示する
 - [ ] 画像にコメントを書く
 - [ ] 編集できるようにする
-
 - [ ] ダイレクトアップロード
   - es6で行うのでbabelの用意
   - Capybara でドラッグ&ドロップのテスト
@@ -33,6 +32,7 @@
 - [ ] S3にファイルを置く
   - [ ] S3へのアップロード設定
   - [ ] S3のアップロードのテスト
+  - [ ] ファイル名の課題
 - [ ] 「同意する」check button を用意する
 - [x] フォーム内で画像のプレビューをする
   - [x] 入力画面
@@ -68,6 +68,12 @@
   - http://blog.livedoor.jp/sasata299/archives/52006066.html
     - え？そうなの
   - https://tech.recruit-mp.co.jp/server-side/niche-rails-tips/
+
+### 画像のモデルとActionDispatch::Http::UploadedFile
+
+- 画像のモデルがありつつ、ファイル自体は ActionDispatch::Http::UploadedFile にある
+  - 2つで1つになる
+  - 取り扱いがややこしい
 
 ### must exit
 
